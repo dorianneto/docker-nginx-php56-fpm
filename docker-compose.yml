@@ -1,0 +1,35 @@
+version: "2"
+
+services:
+    web:
+        build: ./nginx
+        container_name: nginx_local
+        ports:
+            - "80:80"
+        volumes:
+            - /var/www/html:/usr/share/nginx/html
+    php:
+        build: ./php
+        container_name: php_local
+        volumes:
+            - /var/www/html:/usr/share/nginx/html
+    mysql:
+        build: ./mysql
+        container_name: mysql_local
+        environment:
+            MYSQL_ROOT_PASSWORD: K9_3tH@
+        expose:
+            - 3306
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: phpmyadmin_local
+        environment:
+            PMA_ARBITRARY: 1
+            PMA_HOST: mysql
+            PHP_UPLOAD_MAX_FILESIZE: 1G
+            PHP_MAX_INPUT_VARS: 1G
+        restart: always
+        ports:
+            - "8001:80"
+        depends_on:
+            - mysql
