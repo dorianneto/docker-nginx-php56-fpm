@@ -2,4 +2,4 @@ FROM nginx:latest
 
 MAINTAINER Dorian Neto <doriansampaioneto@gmail.com>
 
-ADD config/default.conf /etc/nginx/conf.d/default.conf
+RUN apt-get update && apt-get -y install mysql-client

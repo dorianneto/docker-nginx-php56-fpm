@@ -8,6 +8,7 @@ services:
             - "80:80"
         volumes:
             - /var/www/html:/usr/share/nginx/html
+            - ./nginx/config:/etc/nginx/conf.d
     php:
         build: ./php
         container_name: php_local
